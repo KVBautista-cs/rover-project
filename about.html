@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Rover Team</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
+    <style>
+        body { 
+            margin: 0; 
+            font-family: Arial, sans-serif; 
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        /* Background */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        /* Scrollable Content */
+        .content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px;
+            font-size: 18px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        /* Centered images */
+        .content img {
+            display: block;
+            max-width: 100%;
+            margin: 20px auto;
+        }
+
+        /* Logo */
+        .logo {
+            max-width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <div class="content">
+        <img src="galleryp/cbu_logo.png" alt="CBU Logo" class="logo">
+
+        <h1>About Christian Brothers University</h1>
+        <p>Christian Brothers University (CBU) is a private, Catholic university in Memphis, Tennessee, known for its commitment to academic excellence, service, and community. Founded in 1871 by the De La Salle Christian Brothers, CBU has been shaping the minds of students for over 150 years.</p>
+
+        <h2>Mission & Identity</h2>
+        <p>CBU fosters faith, service, and community, welcoming students from diverse backgrounds into a supportive and academically rigorous environment. Our goal is to educate future leaders who will make an impact in their careers and society.</p>
+
+        <h2>The Engineering Program</h2>
+        <p>CBU is known for its strong engineering programs, offering cutting-edge education in mechanical, electrical, and civil engineering. Students gain hands-on experience through labs, industry partnerships, and real-world projects.</p>
+
+        <img src="galleryp/cbu_engineering.jpg" alt="CBU Engineering Students Working on a Project">
+
+        <h2>Rover Team at CBU</h2>
+        <p>Our Rover Team is a student-led group focused on designing and building a planetary exploration vehicle. This project provides practical engineering experience while fostering teamwork and innovation.</p>
+
+        <h2>Why Choose CBU?</h2>
+        <ul>
+            <li>✅ Nationally Recognized STEM Programs</li>
+            <li>🌍 Diverse & Inclusive Community</li>
+            <li>🛠 Hands-On Learning & Real-World Applications</li>
+            <li>🔬 Cutting-Edge Research & Innovation</li>
+        </ul>
+
+        <img src="galleryp/cbu_campus.jpg" alt="CBU Campus">
+
+        <h2>Join Us!</h2>
+        <p>Interested in being part of CBU’s engineering legacy? Whether you're a student, faculty, or space enthusiast, there's a place for you in the CBU Rover Team. Get involved and help shape the future of planetary exploration!</p>
+    </div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 5, 20);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById("canvas-container").appendChild(renderer.domElement);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+        scene.add(ambientLight);
+
+        function createStarField() {
+            const starsGeometry = new THREE.BufferGeometry();
+            const starVertices = [];
+            for (let i = 0; i < 5000; i++) {
+                starVertices.push(
+                    (Math.random() - 0.5) * 2000, 
+                    (Math.random() - 0.5) * 2000, 
+                    (Math.random() - 0.5) * 2000
+                );
+            }
+            starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+
+            const starsMaterial = new THREE.PointsMaterial({
+                color: 0xffffff,
+                size: 1.5,
+                transparent: true,
+                depthWrite: false,
+            });
+
+            const starField = new THREE.Points(starsGeometry, starsMaterial);
+            scene.add(starField);
+
+            return starField;
+        }
+
+        const starField = createStarField();
+
+        function updateStarTwinkle() {
+    const time = performance.now() * 0.005; // Make sure speed matches across all pages
+    const positions = starField.geometry.attributes.position.array;
+
+    for (let i = 0; i < positions.length; i += 3) {
+        positions[i + 1] += Math.sin(time + i * 0.1) * 0.15; // Uniform twinkle effect
+    }
+
+    starField.geometry.attributes.position.needsUpdate = true;
+}
+
+
+        window.addEventListener("scroll", () => {
+            const scrollY = window.scrollY;
+            starField.position.y = -scrollY * 0.4; 
+        });
+
+        let clickableObjects = [];
+
+        
+        
+        const loader2 = new THREE.GLTFLoader();
+        loader2.load('asteroid.glb', function (gltf) {
+    let asteroid = gltf.scene;
+    asteroid.scale.set(0.03, 0.03, 0.03); // Adjust size
+    asteroid.position.set(-30, 20, -50); // Initial position off-screen
+
+    // Add movement properties
+    asteroid.userData = {
+        speedX: 0.15, // Horizontal speed
+        speedY: 0.05, // Vertical speed
+        rotationSpeed: 0.02, // Rotation speed
+        rangeY: 50, // Vertical movement limit
+        directionY: 1, // Up/Down movement direction
+    };
+
+    scene.add(asteroid);
+
+    function moveAsteroid() {
+    // Move asteroid across screen
+    asteroid.position.x += asteroid.userData.speedX;
+    asteroid.position.y += asteroid.userData.speedY * asteroid.userData.directionY;
+
+    // Rotate asteroid
+    asteroid.rotation.y += asteroid.userData.rotationSpeed;
+    asteroid.rotation.x += asteroid.userData.rotationSpeed * 0.5;
+
+    // Reverse direction when reaching vertical limits
+    if (asteroid.position.y > asteroid.userData.rangeY || asteroid.position.y < -asteroid.userData.rangeY) {
+        asteroid.userData.directionY *= -1;
+    }
+
+    // Fade out when reaching the right side
+    if (asteroid.position.x > 500) {
+        asteroid.traverse((child) => {
+            if (child.isMesh) {
+                child.material.transparent = true;
+                child.material.opacity -= 0.02; // Gradually fade out
+                if (child.material.opacity < 0) child.material.opacity = 0; // Prevent negative opacity
+            }
+        });
+    }
+
+    // Reset position when fully faded out
+    if (asteroid.position.x > 120) {
+        asteroid.position.x = -120; // Move asteroid far off-screen to left
+        asteroid.position.y = Math.random() * 40 - 20; // Random height
+
+        // Reset opacity back to 1
+        asteroid.traverse((child) => {
+            if (child.isMesh) {
+                child.material.opacity = 1;
+            }
+        });
+    }
+
+    requestAnimationFrame(moveAsteroid);
+}
+
+    
+    moveAsteroid();
+});
+
+
+        function updateWobble() {
+            const time = performance.now() * 0.004;
+            clickableObjects.forEach((obj, index) => {
+                if (!obj.userData.baseY) obj.userData.baseY = obj.position.y;
+                obj.position.y = obj.userData.baseY + Math.sin(time + index) * 1.0;
+            });
+        }
+
+        window.addEventListener("click", (event) => {
+            const mouse = new THREE.Vector2();
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            const raycaster = new THREE.Raycaster();
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(scene.children, true);
+            if (intersects.length > 0) {
+                let clickedObject = intersects[0].object;
+                while (clickedObject.parent && !clickedObject.userData.link) {
+                    clickedObject = clickedObject.parent;
+                }
+                if (clickedObject.userData.link) {
+                    window.open(clickedObject.userData.link, "_self");
+                }
+            }
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            updateWobble();
+            updateStarTwinkle();
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    </script>
+</body>
+</html>

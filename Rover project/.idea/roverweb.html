@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header id="header">
+    <a href="index.html" class="logo-link">
+        <img src="cbu rover.png" alt="CBU Rover Logo" class="logo">
+    </a>
+    <button class="menu-toggle" aria-label="Toggle navigation">
+        ☰
+    </button>
+    <nav id="nav-menu" class="nav-menu">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#experiences">Experiences</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section class="slideshow">
+        <div class="slideshow-container">
+            <div class="slide fade">
+                <img src="roverpic1.jpeg" alt="Rover Picture 1">
+            </div>
+            <div class="slide fade">
+                <img src="roverpic2.jpeg" alt="Rover Picture 2">
+            </div>
+            <div class="slide fade">
+                <img src="roverpic3.jpeg" alt="Rover Picture 3">
+            </div>
+            <div class="slide fade">
+                <img src="roverpic4.jpeg" alt="Rover Picture 4">
+            </div>
+        </div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </section>
+
+    <section class="cbu-info">
+        <div class="cbu-info-content">
+            <!-- Image on the left -->
+            <div class="cbu-info-image">
+                <img src="cbu rover.png" alt="CBU Rover" class="cbu-rover-img">
+            </div>
+            <!-- Text on the right -->
+            <div class="cbu-info-text">
+                <h2>About Christian Brothers University</h2>
+                <p>Christian Brothers University (CBU) is a private Roman Catholic university in Memphis, Tennessee. It is affiliated with the Institute of the Brothers of the Christian Schools, a Catholic teaching order, and is one of more than 1,000 Lasallian educational institutions in 77 countries.</p>
+                <p>Our team at CBU is dedicated to excellence in engineering and innovation, with a strong focus on hands-on learning and practical experience. We strive to apply our knowledge in meaningful ways, contributing to projects like the Rover, which enhances our skills and prepares us for future careers in the field.</p>
+            </div>
+        </div>
+    </section>        <p>Rover project</p>
+</main>
+<footer>
+    <p>&copy; 2024 Rover Engineering Team</p>
+</footer>
+<script src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+/* General Page Styling */
+body {
+  margin: 0;
+  overflow: hidden;
+  background: black;
+}
+
+/* Container for Three.js Scene */
+#three-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Header Title Styling */
+#header-title {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(35px, 5vw, 60px); /* Responsive font size */
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 1), 
+               0 0 20px rgba(255, 255, 255, 0.8), 
+               0 0 30px rgba(255, 255, 255, 0.6);
+  white-space: nowrap; /* Ensures title remains in a single line */
+  transition: transform 0.1s ease-out;
+}
+
+/* Icon Labels (Text Above Icons) */
+.icon-label {
+  position: absolute;
+  color: white;
+  font-size: 35px;
+  font-weight: bold;
+  text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+  pointer-events: none; /* Prevents interaction */
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Hover Effect for Header */
+#header-title:hover {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 1), 
+               0 0 30px rgba(255, 255, 255, 0.8), 
+               0 0 40px rgba(255, 255, 255, 0.6);
+  transform: translateX(-50%) scale(1.1);
+}
+
+/* Hover Effect for Icons */
+.icon {
+  transition: all 0.2s ease-in-out;
+}
+
+.icon:hover {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) 
+          drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)) 
+          drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
+  transform: scale(1.1);
+}
+
+/* Hover Effect for Icon Labels */
+.icon-label:hover {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 1), 
+               0 0 20px rgba(255, 255, 255, 0.8), 
+               0 0 30px rgba(255, 255, 255, 0.6);
+  transform: scale(1.1);
+}
+/* Glowing effect for labels */
+.icon-label {
+    position: absolute;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+    pointer-events: none; /* Prevents interaction */
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease-in-out, text-shadow 0.3s ease-in-out;
+}
+
+.icon-label:hover {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 1), 
+                 0 0 30px rgba(255, 255, 255, 0.8), 
+                 0 0 45px rgba(255, 255, 255, 0.6);
+}
+
+/* Glowing effect for icons */
+.glowing-icon {
+    transition: transform 0.2s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.glowing-icon:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+}
+
+/* 📱 Responsive Styles for Mobile */
+@media screen and (max-width: 768px) {
+  #header-title {
+      font-size: clamp(20px, 6vw, 35px); /* Adjust for smaller screens */
+  }
+
+  .icon-label {
+      font-size: clamp(14px, 4vw, 24px);
+  }
+
+  #labels {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+  }
+}
+
+/* Ensure Three.js Canvas Fits on Mobile */
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+

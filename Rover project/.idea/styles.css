@@ -1,0 +1,287 @@
+/* Basic reset and styling */
+body, h1, p, ul {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Gradient background */
+body {
+    background: linear-gradient(to bottom, red, white);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header styling with navigation bar */
+header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: transparent; /* To allow gradient to show */
+    border-bottom: 2px solid #ccc; /* Add a bottom border */
+    position: fixed; /* Fix the header at the top */
+    width: 100%;
+    top: 0;
+    transition: top 0.3s; /* Smooth transition for hide/show effect */
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+    z-index: 1000; /* Ensure header is on top of other content */
+}
+
+/* Logo styling */
+header .logo-link {
+    display: flex;
+    align-items: center;
+    margin-right: auto; /* Push logo to the start of header */
+}
+
+header .logo {
+    height: 50px; /* Adjust the size as needed */
+    width: auto;
+}
+
+/* Menu toggle button */
+.menu-toggle {
+    display: none; /* Hide by default */
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Navigation styling */
+header nav {
+    display: flex;
+    flex-grow: 1; /* Allow navigation to take available space */
+    justify-content: flex-end; /* Align items to the end */
+}
+
+header nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    flex-wrap: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflow */
+}
+
+header nav ul li {
+    display: inline;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+    padding: 0.5rem; /* Add padding for better spacing */
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #555;
+}
+
+/* Main content styling */
+main {
+    flex: 1;
+    padding: 1rem 2rem;
+    margin-top: 60px; /* Adjust to prevent overlap with fixed header */
+}
+
+/* Footer styling */
+footer {
+    padding: 1rem 2rem;
+    text-align: center;
+    background-color: transparent; /* To allow gradient to show */
+}
+
+/* Slideshow container styling */
+.slideshow {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+    margin-top: 60px; /* Adjust based on the height of the white line */
+}
+
+/* Hide all slides by default */
+.slide {
+    display: none;
+}
+
+/* Style for slideshow images */
+.slideshow img {
+    width: 100%; /* Full width of the container */
+    max-width: 100%; /* Prevents the image from exceeding the container width */
+    height: 400px; /* Set a fixed height */
+    object-fit: cover; /* Ensure the image covers the area without stretching */
+    display: block; /* Remove any extra spacing below the image */
+}
+
+/* Navigation buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: background-color 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* Button hover effect */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* Ensure no horizontal scrolling */
+body {
+    overflow-x: hidden; /* Prevent horizontal scrolling on the entire page */
+    max-width: 100vw; /* Ensure body does not exceed viewport width */
+    box-sizing: border-box; /* Include padding/border in width calculation */
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    header {
+        flex-direction: row; /* Keep items in a row */
+        padding: 1rem; /* Adjust padding for mobile */
+    }
+
+    .menu-toggle {
+        display: block; /* Show the menu toggle button */
+        margin-right: 1rem; /* Space between button and logo */
+    }
+
+    .nav-menu {
+        display: none; /* Hide the nav menu by default */
+        flex-direction: column; /* Stack menu items vertically */
+        width: 100%; /* Full width on mobile */
+        background-color: white; /* Background color for dropdown */
+        position: absolute; /* Position menu relative to header */
+        top: 60px; /* Position below header */
+        left: 0; /* Align menu to the left of the header */
+        z-index: 1000; /* Ensure it’s on top of other content */
+        border-top: 2px solid #ccc; /* Border to separate from header */
+        overflow: hidden; /* Hide overflow to handle transition */
+        max-height: 0; /* Initial height is zero */
+        transition: max-height 0.3s ease-out; /* Smooth transition for height */
+    }
+
+    .nav-menu.active {
+        display: flex; /* Show menu when active */
+        max-height: 500px; /* Adjust height as needed to fit content */
+    }
+
+    .nav-menu ul {
+        list-style-type: none;
+        padding: 0; /* Remove default padding */
+        margin: 0; /* Remove default margin */
+    }
+
+    .nav-menu ul li {
+        margin-bottom: 0.5rem; /* Add space between navigation items */
+    }
+
+    .nav-menu ul li a {
+        display: block; /* Ensure links are block-level for better touch targets */
+        text-align: center; /* Center text */
+        padding: 1rem; /* Add padding for better spacing */
+    }
+}
+
+@media (max-width: 480px) {
+    header .logo {
+        height: 40px; /* Adjust logo size for smaller screens */
+    }
+
+    header nav ul li a {
+        font-size: 0.9rem; /* Reduce font size for smaller screens */
+    }
+/* Smoother Styling for CBU Info Section */
+.cbu-info {
+    padding: 2.5rem;
+    margin-top: 2.5rem;
+    background-color: white;
+    border-radius: 16px; /* More rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow for depth */
+    transition: box-shadow 0.3s ease; /* Smooth transition on hover */
+}
+
+.cbu-info:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Add a subtle hover effect */
+}
+
+.cbu-info-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Maintain space between image and text */
+    flex-wrap: wrap; /* Allows wrapping for smaller screens */
+}
+
+.cbu-info-image {
+    flex: 1;
+    margin-right: 2.5rem; /* More space between image and text */
+    transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.cbu-info-image img:hover {
+    transform: scale(1.05); /* Slight zoom on hover for effect */
+}
+
+.cbu-info-text {
+    flex: 2;
+}
+
+.cbu-info h2 {
+    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 1.2rem;
+    font-family: 'Arial', sans-serif;
+}
+
+.cbu-info p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Style for the image with smoother corners */
+.cbu-rover-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px; /* Smooth rounded corners for image */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow around image */
+    transition: box-shadow 0.3s ease;
+}
+
+.cbu-rover-img:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .cbu-info-content {
+        flex-direction: column; /* Stack image on top of text */
+    }
+
+    .cbu-info-image {
+        margin-right: 0; /* Remove right margin when stacking */
+        margin-bottom: 1.5rem; /* Add more bottom margin when stacking */
+    }
+}
